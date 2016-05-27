@@ -6,6 +6,8 @@ using NugetNotify.Core.Helpers;
 using NugetNotify.Core.Helpers.Implementations;
 using NugetNotify.Core.Services;
 using NugetNotify.Core.Services.Implementations;
+using NugetNotify.Database;
+using NugetNotify.Database.Interfaces;
 
 namespace NugetNotify.Core.Windsor
 {
@@ -15,6 +17,7 @@ namespace NugetNotify.Core.Windsor
         {
             container.Register(
                 Classes.FromThisAssembly().BasedOn<IController>().LifestyleTransient(),
+                Component.For<IDatabaseContext>().ImplementedBy<DatabaseContext>().LifestylePerWebRequest(),
                 Component.For<IStringHelper>().ImplementedBy<StringHelper>().LifestyleTransient(),
                 Component.For<IPackageNotificationService>().ImplementedBy<PackageNotificationService>().LifestyleTransient(),
                 Component.For<IPackageNotificationTargetService>().ImplementedBy<PackageNotificationTargetService>().LifestyleTransient(),

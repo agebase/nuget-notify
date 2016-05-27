@@ -3,17 +3,21 @@ using System.Linq;
 using NugetNotify.Core.Helpers;
 using NugetNotify.Core.Models;
 using NugetNotify.Core.Models.Implementations;
-using NugetNotify.Database;
 using NugetNotify.Database.Entities;
+using NugetNotify.Database.Interfaces;
 
 namespace NugetNotify.Core.Services.Implementations
 {
     internal class PackageService : IPackageService
     {
+        private readonly IDatabaseContext _databaseContext;
         private readonly IStringHelper _stringHelper;
 
-        public PackageService(IStringHelper stringHelper)
+        public PackageService(
+            IDatabaseContext databaseContext,
+            IStringHelper stringHelper)
         {
+            _databaseContext = databaseContext;
             _stringHelper = stringHelper;
         }
 
@@ -29,19 +33,16 @@ namespace NugetNotify.Core.Services.Implementations
 
             var retval = new Package();
 
-            using (var db = new DatabaseContext())
+            var entity = new PackageEntity
             {
-                var entity = new PackageEntity
-                {
-                    Name = cleaned
-                };
+                Name = cleaned
+            };
 
-                db.Packages.Add(entity);
-                db.SaveChanges();
+            _databaseContext.Packages.Add(entity);
+            _databaseContext.SaveChanges();
 
-                retval.Id = entity.Id;
-                retval.Name = entity.Name;
-            }
+            retval.Id = entity.Id;
+            retval.Name = entity.Name;
 
             return retval;
         }
@@ -50,15 +51,7 @@ namespace NugetNotify.Core.Services.Implementations
         {
             var cleaned = _stringHelper.Clean(name);
 
-            if (string.IsNullOrWhiteSpace(cleaned))
-                return false;
-
-            bool retval;
-
-            using (var db = new DatabaseContext())
-                retval = db.Packages.Any(p => p.Name.Equals(cleaned));
-
-            return retval;
+            return !string.IsNullOrWhiteSpace(cleaned) && _databaseContext.Packages.Any(p => p.Name.Equals(cleaned));
         } 
 
         public IPackage Get(string name)
@@ -71,17 +64,13 @@ namespace NugetNotify.Core.Services.Implementations
             if (!Exists(name))
                 return null;
 
-            var retval = new Package();
+            var entity = _databaseContext.Packages.Single(p => p.Name.Equals(cleaned));
 
-            using (var db = new DatabaseContext())
+            return new Package
             {
-                var entity = db.Packages.Single(p => p.Name.Equals(cleaned));
-
-                retval.Id = entity.Id;
-                retval.Name = entity.Name;
-            }
-
-            return retval;
+                Id = entity.Id,
+                Name = entity.Name
+            };
         }
     }
 }

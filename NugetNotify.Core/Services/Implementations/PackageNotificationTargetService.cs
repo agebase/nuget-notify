@@ -3,18 +3,22 @@ using System.Linq;
 using NugetNotify.Core.Helpers;
 using NugetNotify.Core.Models;
 using NugetNotify.Core.Models.Implementations;
-using NugetNotify.Database;
 using NugetNotify.Database.Entities;
 using NugetNotify.Database.Enumerations;
+using NugetNotify.Database.Interfaces;
 
 namespace NugetNotify.Core.Services.Implementations
 {
     internal class PackageNotificationTargetService : IPackageNotificationTargetService
     {
+        private readonly IDatabaseContext _databaseContext;
         private readonly IStringHelper _stringHelper;
 
-        public PackageNotificationTargetService(IStringHelper stringHelper)
+        public PackageNotificationTargetService(
+            IDatabaseContext databaseContext,
+            IStringHelper stringHelper)
         {
+            _databaseContext = databaseContext;
             _stringHelper = stringHelper;
         }
 
@@ -28,40 +32,29 @@ namespace NugetNotify.Core.Services.Implementations
             if (Exists(type, value))
                 return null;
 
-            var retval = new PackageNotificationTarget();
-
-            using (var db = new DatabaseContext())
+            var entity = new PackageNotificationTargetEntity
             {
-                var entity = new PackageNotificationTargetEntity
-                {
-                    Type = type,
-                    Value = cleaned
-                };
+                Type = type,
+                Value = cleaned
+            };
 
-                db.PackageNotificationTargets.Add(entity);
-                db.SaveChanges();
+            _databaseContext.PackageNotificationTargets.Add(entity);
+            _databaseContext.SaveChanges();
 
-                retval.Id = entity.Id;
-                retval.Type = entity.Type;
-                retval.Value = entity.Value;
-            }
-
-            return retval;
+            return new PackageNotificationTarget
+            {
+                Id = entity.Id,
+                Type = entity.Type,
+                Value = entity.Value
+            };
         }
 
         public bool Exists(PackageNotificationType type, string value)
         {
             var cleaned = _stringHelper.Clean(value);
 
-            if (string.IsNullOrWhiteSpace(cleaned))
-                return false;
-
-            bool retval;
-
-            using (var db = new DatabaseContext())
-                retval = db.PackageNotificationTargets.Any(pnt => pnt.Type == type && pnt.Value.Equals(cleaned));
-
-            return retval;
+            return !string.IsNullOrWhiteSpace(cleaned) && 
+                _databaseContext.PackageNotificationTargets.Any(pnt => pnt.Type == type && pnt.Value.Equals(cleaned));
         }
 
         public IPackageNotificationTarget Get(PackageNotificationType type, string value)
@@ -74,18 +67,14 @@ namespace NugetNotify.Core.Services.Implementations
             if (!Exists(type, value))
                 return null;
 
-            var retval = new PackageNotificationTarget();
+            var entity = _databaseContext.PackageNotificationTargets.Single(pnt => pnt.Type == type && pnt.Value.Equals(cleaned));
 
-            using (var db = new DatabaseContext())
+            return new PackageNotificationTarget
             {
-                var entity = db.PackageNotificationTargets.Single(pnt => pnt.Type == type && pnt.Value.Equals(cleaned));
-
-                retval.Id = entity.Id;
-                retval.Type = entity.Type;
-                retval.Value = entity.Value;
-            }
-
-            return retval;
+                Id = entity.Id,
+                Type = entity.Type,
+                Value = entity.Value
+            };
         }
     }
 }

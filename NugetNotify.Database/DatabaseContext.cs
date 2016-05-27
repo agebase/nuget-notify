@@ -1,10 +1,11 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.SqlServer;
 using NugetNotify.Database.Entities;
+using NugetNotify.Database.Interfaces;
 
 namespace NugetNotify.Database
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : DbContext, IDatabaseContext
     {
         public DatabaseContext() : base("NugetNotifyDatabaseContext")
         {

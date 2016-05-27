@@ -56,6 +56,7 @@
     <Compile Include="Entities\PackageEntity.cs" />
     <Compile Include="Entities\PackageNotificationEntity.cs" />
     <Compile Include="Entities\PackageNotificationTargetEntity.cs" />
+    <Compile Include="Interfaces\IDatabaseContext.cs" />
     <Compile Include="Migrations\MigrationContext.cs" />
     <Compile Include="Migrations\v1_0_0\InitialCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
