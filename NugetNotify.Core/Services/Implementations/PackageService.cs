@@ -8,7 +8,7 @@ using NugetNotify.Database.Interfaces;
 
 namespace NugetNotify.Core.Services.Implementations
 {
-    internal class PackageService : IPackageService
+    public class PackageService : IPackageService
     {
         private readonly IDatabaseContext _databaseContext;
         private readonly IStringHelper _stringHelper;
@@ -26,10 +26,10 @@ namespace NugetNotify.Core.Services.Implementations
             var cleaned = _stringHelper.Clean(name);
 
             if (string.IsNullOrWhiteSpace(cleaned))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
+                throw new ArgumentNullException(nameof(name));
 
             if (Exists(name))
-                return null;
+                throw new ArgumentException("Package already exists");
 
             var retval = new Package();
 
@@ -59,7 +59,7 @@ namespace NugetNotify.Core.Services.Implementations
             var cleaned = _stringHelper.Clean(name);
 
             if (string.IsNullOrWhiteSpace(cleaned))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
+                throw new ArgumentNullException(nameof(name));
 
             if (!Exists(name))
                 return null;

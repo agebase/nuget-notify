@@ -27,10 +27,10 @@ namespace NugetNotify.Core.Services.Implementations
             var cleaned = _stringHelper.Clean(value);
 
             if (string.IsNullOrWhiteSpace(cleaned))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(value));
+                throw new ArgumentNullException(nameof(value));
 
             if (Exists(type, value))
-                return null;
+                throw new ArgumentException("Package Notification Target already exists");
 
             var entity = new PackageNotificationTargetEntity
             {
@@ -62,7 +62,7 @@ namespace NugetNotify.Core.Services.Implementations
             var cleaned = _stringHelper.Clean(value);
 
             if (string.IsNullOrWhiteSpace(cleaned))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(value));
+                throw new ArgumentNullException(nameof(value));
 
             if (!Exists(type, value))
                 return null;
