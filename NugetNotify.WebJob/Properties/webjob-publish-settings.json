@@ -1,0 +1,9 @@
+﻿{
+  "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
+  "webJobName": "nugetnotify-webjob",
+  "startTime": "2016-05-25T00:00:00+00:00",
+  "endTime": "2016-05-26T00:00:00+00:00",
+  "jobRecurrenceFrequency": "Hour",
+  "interval": 1,
+  "runMode": "Scheduled"
+}

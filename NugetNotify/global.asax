@@ -1,0 +1,1 @@
+﻿<%@ Application Inherits="NugetNotify.Core.Global.GlobalApplication" Language="C#" %>

@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetNotify", "NugetNotify\NugetNotify.csproj", "{958D9A11-2418-4075-B07E-897CF02040FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetNotify.Tests", "NugetNotify.Tests\NugetNotify.Tests.csproj", "{001E958C-5D6F-4A18-87A9-A53B81277C90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F01CC687-5BF1-4E88-AF9B-0076FEAE0C77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetNotify.Core", "NugetNotify.Core\NugetNotify.Core.csproj", "{EA081A46-E51C-4178-BA71-737B60E24426}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetNotify.Database", "NugetNotify.Database\NugetNotify.Database.csproj", "{F1A80078-3564-48E9-AEF8-6CC20FFDDA58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetNotify.WebJob", "NugetNotify.WebJob\NugetNotify.WebJob.csproj", "{2361E1C9-DBA7-4B5C-95D9-75F04E11E255}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{958D9A11-2418-4075-B07E-897CF02040FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{958D9A11-2418-4075-B07E-897CF02040FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{958D9A11-2418-4075-B07E-897CF02040FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{958D9A11-2418-4075-B07E-897CF02040FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{001E958C-5D6F-4A18-87A9-A53B81277C90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{001E958C-5D6F-4A18-87A9-A53B81277C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{001E958C-5D6F-4A18-87A9-A53B81277C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{001E958C-5D6F-4A18-87A9-A53B81277C90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA081A46-E51C-4178-BA71-737B60E24426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA081A46-E51C-4178-BA71-737B60E24426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA081A46-E51C-4178-BA71-737B60E24426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA081A46-E51C-4178-BA71-737B60E24426}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1A80078-3564-48E9-AEF8-6CC20FFDDA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A80078-3564-48E9-AEF8-6CC20FFDDA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A80078-3564-48E9-AEF8-6CC20FFDDA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A80078-3564-48E9-AEF8-6CC20FFDDA58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2361E1C9-DBA7-4B5C-95D9-75F04E11E255}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2361E1C9-DBA7-4B5C-95D9-75F04E11E255}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2361E1C9-DBA7-4B5C-95D9-75F04E11E255}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2361E1C9-DBA7-4B5C-95D9-75F04E11E255}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{001E958C-5D6F-4A18-87A9-A53B81277C90} = {F01CC687-5BF1-4E88-AF9B-0076FEAE0C77}
+	EndGlobalSection
+EndGlobal
