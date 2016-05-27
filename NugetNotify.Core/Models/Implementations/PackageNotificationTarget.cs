@@ -2,7 +2,7 @@
 
 namespace NugetNotify.Core.Models.Implementations
 {
-    internal class PackageNotificationTarget : IPackageNotificationTarget
+    public class PackageNotificationTarget : IPackageNotificationTarget
     {
         public int Id { get; set; }
         

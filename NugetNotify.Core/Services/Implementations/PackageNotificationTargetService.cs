@@ -9,7 +9,7 @@ using NugetNotify.Database.Interfaces;
 
 namespace NugetNotify.Core.Services.Implementations
 {
-    internal class PackageNotificationTargetService : IPackageNotificationTargetService
+    public class PackageNotificationTargetService : IPackageNotificationTargetService
     {
         private readonly IDatabaseContext _databaseContext;
         private readonly IStringHelper _stringHelper;

@@ -2,7 +2,7 @@
 
 namespace NugetNotify.Core.Helpers.Implementations
 {
-    internal class StringHelper : IStringHelper
+    public class StringHelper : IStringHelper
     {
         public string Clean(string value)
         {

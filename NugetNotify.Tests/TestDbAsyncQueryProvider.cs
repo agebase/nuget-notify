@@ -10,7 +10,7 @@ namespace NugetNotify.Tests
     {
         private readonly IQueryProvider _inner;
 
-        internal TestDbAsyncQueryProvider(IQueryProvider inner)
+        public TestDbAsyncQueryProvider(IQueryProvider inner)
         {
             _inner = inner;
         }
